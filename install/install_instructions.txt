@@ -21,7 +21,7 @@ apt install -y nodejs
 # install nginx and dependencies
 apt install nginx libnginx-mod-nchan git libpng-dev nasm
 apt install php7.0 php7.0-gd php7.0-mysql php7.0-fpm php7.0-xml php7.0-mbstring php7.0-curl php7.0-bcmath php7.0-zip
-cd /var/www/; git clone https://github.com/BerlusGmbH/Berlussimo berlussimo
+cd /var/www/; git clone https://github.com/onlinepilot/Berlussimo berlussimo
 cd /var/www/berlussimo/; git checkout master
 
 # install MySQL. The setup will let you set a root password for the mySQL server. You will need this later.
@@ -50,7 +50,7 @@ mysql -u root -p berlussimo < /var/www/berlussimo/install/DB-Version-0.4.0/berlu
 #            'strict' => false,
 #            'engine' => null,
 #        ],
-nano /var/www/berlussimo/app/config/database.php
+nano /var/www/berlussimo/config/database.php
 
 sudo mysql -u root
 
