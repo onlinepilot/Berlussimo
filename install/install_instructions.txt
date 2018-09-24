@@ -52,6 +52,23 @@ mysql -u root -p berlussimo < /var/www/berlussimo/install/DB-Version-0.4.0/berlu
 #        ],
 nano /var/www/berlussimo/app/config/database.php
 
+sudo mysql -u root
+
+MariaDB [(none)]> select user,host,password,plugin from mysql.user;
+  +------+-----------+------------------------+-------------+
+  | user | host      | password               | plugin      |
+  +------+-----------+------------------------+-------------+
+  | root | localhost | *geheimerhashcode      | unix_socket |
+  | root | e320      | *geheimerhashcode      | unix_socket |
+  | root | 127.0.0.1 | *geheimerhashcode      | unix_socket |
+  | root | ::1       | *geheimerhashcode      | unix_socket |
+  +------+-----------+------------------------+-------------+
+
+MariaDB [(none)]> update mysql.user set plugin='' where user='root';
+MariaDB [(none)]> flush privileges;
+
+
+
 #install composer and fetch dependencies
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 cd /var/www/berlussimo/
@@ -70,6 +87,9 @@ php artisan parser:generate
 php artisan passport:install
 # else if you only setup a fresh webserver
 php artisan passport:keys
+
+# if the git port is blocked, change to https://
+git config --global url."https://".insteadOf git://
 
 # install node dependencies
 npm install
