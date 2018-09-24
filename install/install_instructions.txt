@@ -102,7 +102,9 @@ chown -R www-data:www-data /var/www/berlussimo
 
 # edit default (/etc/nginx/sites-available/default) site to
 # reflect settings from install/config/nginx/default
-nano /etc/nginx/sites-available/default
+mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.orig
+cp install/config/nginx/default /etc/nginx/sites-available/
+#nano /etc/nginx/sites-available/default
 systemctl restart nginx
 
 # copy install/config/systemd/laravell-queue.service to /etc/systemd/system/
